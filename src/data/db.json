@@ -1,0 +1,10 @@
+{
+  "projects": [
+    {
+      "id": "1",
+      "title": "Meeting",
+      "description": "Toolbox meeting every day starting at 7:55 am",
+      "completed": false
+    }
+  ]
+}
