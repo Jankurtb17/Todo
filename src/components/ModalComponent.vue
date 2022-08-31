@@ -21,7 +21,6 @@ const closeModal = () => {
 <style scoped>
 .modal {
   width: 550px;
-  /* padding: 20px; */
   margin: 100px auto;
   background: #fff;
   border-radius: 10px;
