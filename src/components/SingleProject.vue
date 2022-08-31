@@ -4,13 +4,15 @@
       <h3 @click="showDetails = !showDetails" class="cursor-pointer">{{props.project.title}}</h3>
       <div>
         <span class="material-icons cursor-pointer px-1">done</span>
-        <span class="material-icons cursor-pointer px-1">edit</span>
+        <span class="material-icons cursor-pointer px-1"><router-link :to="{ name: 'editProject', params: {id: props.project.id}}">edit</router-link></span>
         <span class="material-icons cursor-pointer px-1" @click="deleteTask(props.project.id)">delete</span>
       </div>
     </div>
-    <div class="details" v-if="showDetails">
-      <p>{{props.project.description}}</p>
-    </div>
+    <transition name="fade">
+      <div class="details" v-if="showDetails">
+        <p>{{props.project.description}}</p>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -19,12 +21,17 @@ import { ref } from "vue";
 const props = defineProps(["project"])
 const emit = defineEmits<{
   (e: "openDialog"): void
-  (e: "deleteProj", id: any): void
+  (e: "deleteProj", id: any): boolean
+  (e: "updateDialog", id: any): boolean
 }>()
 const showDetails = ref(false);
 const delProject = ref(false);
 const completeTask = () => {
   
+}
+
+const editTask = (id: any) => {
+  emit("updateDialog", id)
 }
 
 const deleteTask = (id: any) => {
@@ -49,5 +56,19 @@ const deleteTask = (id: any) => {
 .material-icons:hover {
   color: #777;
 }
+
+
+.fade-enter-from {
+  opacity: 0;
+} 
+
+.fade-enter-to {
+  opacity: 1;
+}
+
+.fade-enter-active {
+  transition: all 2s ease-in-out;
+}
+
 
 </style>
