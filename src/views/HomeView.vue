@@ -12,21 +12,23 @@
           />
         </div>
       </div>
-    <Teleport to=".modals" v-if="deleteModal">
-      <Modal teleport="body" @closeModal="openModal">
-        <div class="flex px-4 py-4">
-          <span class="material-icons text-red-500 pr-3">warning</span> 
-          <div>
-            <h1 class="font-medium tracking-wide text-xl">Delete Project</h1>
-            <p>Are you sure you want to delete this project ?</p>
+    <transition name="fade">
+      <Teleport to=".modals" v-if="deleteModal">
+        <Modal teleport="body" @closeModal="openModal">
+          <div class="flex px-4 py-4">
+            <span class="material-icons text-red-500 pr-3">warning</span> 
+            <div>
+              <h1 class="font-medium tracking-wide text-xl">Delete Project</h1>
+              <p>Are you sure you want to delete this project ?</p>
+            </div>
           </div>
-        </div>
-        <div class="flex justify-end bg-gray-100 space-x-2 mt-5 py-2 px-1 rounded">
-          <button class="rounded px-4 bg-white border border-slate-300 py-1" @click="openModal">Cancel</button>
-          <button class="rounded px-4 bg-white border bg-red-700 text-white focus:bg-red-800 border-slate-300 py-1">Delete</button>
-        </div>
-      </Modal>
-    </Teleport>
+          <div class="flex justify-end bg-gray-100 space-x-2 mt-5 py-2 px-1 rounded">
+            <button class="rounded px-4 bg-white border border-slate-300 py-1" @click="openModal">Cancel</button>
+            <button class="rounded px-4 bg-white border bg-red-700 text-white focus:bg-red-800 border-slate-300 py-1">Delete</button>
+          </div>
+        </Modal>
+      </Teleport>
+    </transition>
   </div>
 </template>
 
@@ -38,9 +40,10 @@ import SingleProject from "@/components/SingleProject.vue";
 import Loading from "@/components/LoadingComponent.vue";
 import Modal from "@/components/ModalComponent.vue";
 const { getData, deleteProject } = useProjects();
-const projects = ref([] as Projects[])
-const isLoading = ref(false)
+const projects = ref([] as Projects[]);
+const isLoading = ref(false);
 const deleteModal = ref(false);
+const updateModal = ref(false);
 
 type Projects = {
   id: string,
@@ -51,6 +54,10 @@ type Projects = {
 
 const openModal = () => {
   return deleteModal.value = !deleteModal.value
+}
+
+const updateDialog = () => {
+  return updateModal.value = !updateModal.value;
 }
 
 const displayProjects = async () => {
@@ -68,7 +75,6 @@ const deleteProjects = async (id: any) => {
       
     }
   }
-
 }
 
 onMounted(() => {
@@ -76,3 +82,21 @@ onMounted(() => {
 })
 
 </script>
+
+<style scoped>
+.fade-enter-from {
+  opacity: 0;
+} 
+
+.fade-enter-active {
+  transition: all 2s ease-in;
+}
+
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-leave-active {
+  transition: all 2s ease-out;
+}
+</style>
