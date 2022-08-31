@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import HomeView from "@/views/HomeView.vue";
-import ProjectManagement from "@/views/ProjectManagement.vue";
+import TaskForm from "@/components/TaskForm.vue";
+import EditProject from "@/components/EditForm.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -11,7 +12,12 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/project",
     name: "project",
-    component: ProjectManagement,
+    component: TaskForm,
+  },
+  {
+    path: "/project/:id",
+    name: "editProject",
+    component: EditProject
   },
 ];
 
