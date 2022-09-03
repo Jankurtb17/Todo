@@ -3,12 +3,14 @@
 ## Project setup
 ```
 npm install
+npm install @heroicons/vue
 npm install json-server
 ```
 
 ### Compiles and hot-reloads for development
 ```
 npm run serve
+json-server --watch src/data/db.json
 ```
 
 ### Compiles and minifies for production
@@ -21,5 +23,7 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### About Project
+```
+this is just a practice project.
+```
