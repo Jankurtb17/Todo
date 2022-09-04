@@ -48,9 +48,9 @@ const useProjects = () => {
   };
 
   const deleteProject = async (id: any) => {
-    const projects = axios.delete(url, id)
+    const projects = axios.delete(url+id)
       .then((response) => {
-        return response;
+        return response.data;
       })
       .catch((e) => {
         throw e;
