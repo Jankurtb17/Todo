@@ -5,6 +5,7 @@
 npm install
 npm install @heroicons/vue
 npm install json-server
+npm install firebase
 ```
 
 ### Compiles and hot-reloads for development
