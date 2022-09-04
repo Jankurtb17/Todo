@@ -4,6 +4,24 @@ import router from "./router";
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import './index.css'
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCsXwadglpNccVPBrmqNHt3yQHipkH_-yI",
+  authDomain: "todo-ceb51.firebaseapp.com",
+  projectId: "todo-ceb51",
+  storageBucket: "todo-ceb51.appspot.com",
+  messagingSenderId: "926542903835",
+  appId: "1:926542903835:web:84127aca517d5450c896be",
+  measurementId: "G-5269R9P1E8"
+};
+
+// Initialize Firebase
+initializeApp(firebaseConfig);
 
 const app = createApp(App)
 
