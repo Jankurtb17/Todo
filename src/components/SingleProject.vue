@@ -1,5 +1,6 @@
 <template>
-  <div class="project py-5 px-10 rounded border ">
+  
+  <div class="project py-5 px-10 rounded border hover:scale-110 hover:duration-300 hover:ease-in ">
     <div class="actions flex justify-between">
       <h3 @click="showDetails = !showDetails" class="cursor-pointer">{{props.project.title}}</h3>
       <div>
@@ -37,7 +38,6 @@ const editTask = (id: any) => {
 const deleteTask = (id: any) => {
   emit("openDialog")
   emit("deleteProj", id)
-  console.log(id);
 }
 
 </script>
@@ -67,8 +67,13 @@ const deleteTask = (id: any) => {
 }
 
 .fade-enter-active {
-  transition: all 2s ease-in-out;
+  transition: all .5s ease-in-out;
 }
 
+
+.projects {
+  transform: translateY(-20px);
+  transition: all 5s ease-out;
+}
 
 </style>
