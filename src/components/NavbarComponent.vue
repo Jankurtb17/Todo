@@ -1,5 +1,5 @@
 <template>
-  <nav class="py-5 uppercase text-white">
+  <nav class="py-5 uppercase text-white ">
     <div class="container mx-auto flex justify-between font-bold w-full">
       <div>
         <router-link to="/" class="px-2">jfetm</router-link>
@@ -9,7 +9,7 @@
         <router-link to="/project" v-if="isLoggedIn">Projects</router-link>
         <router-link to="/register" v-if="!isLoggedIn">Register</router-link>
         <router-link to="/login" v-if="!isLoggedIn">Login</router-link>
-        <button @click="logoutUser" v-if="isLoggedIn" class="uppercase">Sign Out</button>
+        <button @click="logoutUser" v-if="isLoggedIn" class="uppercase pr-2">Sign Out</button>
       </div>
     </div>
   </nav>
