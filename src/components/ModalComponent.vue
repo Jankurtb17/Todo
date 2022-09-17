@@ -1,6 +1,6 @@
 <template>
   <div class="backdrop" @click.self="closeModal">
-    <div class="modal">
+    <div class="modal sm:w-80 w-full mx-auto mt-40">
       <div class="flex px-4 py-4">
         <span class="material-icons text-red-500 pr-3 py-1">{{props.type}}</span> 
         <div>
@@ -29,8 +29,7 @@ const closeModal = () => {
 
 <style scoped>
 .modal {
-  width: 550px;
-  margin: 100px auto;
+
   background: #fff;
   border-radius: 10px;
 }
