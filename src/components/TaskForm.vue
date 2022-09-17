@@ -1,7 +1,7 @@
 <template>
   <h1 class="text-3xl font-bold text-center mt-5 mb-5">Create Project </h1> 
   <div class="form-section">
-    <div class="container mx-auto">
+    <div class="container sm:px-2">
       <form @submit.prevent>
         <h1 class="text-sm uppercase">Title</h1>
         <input type="text" v-model="form.title" class="mb-5 sm:w-full md:w-full w-full border border-slate-300 rounded-md py-2 pl-2 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"/>
@@ -33,19 +33,20 @@ const form = reactive({
 });
 
 const submitTask = async () => {
-  if (form.title === undefined) {
+  if (form.title === "" && form.description === "") {
     return;
-  }
-  try {
-    await addProjects(
-      uuidv4,
-      form.title,
-      form.description,
-      form.completed
-    )
-    router.push("/")
-  } catch (e) {
-    console.log(e)
+  } else {
+    try {
+      await addProjects(
+        uuidv4,
+        form.title,
+        form.description,
+        form.completed
+      )
+      router.push("/")
+    } catch (e) {
+      console.log(e)
+    }
   }
 };
 
