@@ -9,11 +9,4 @@
 
 <script lang="ts" setup>
 import Navbar from "@/components/NavbarComponent.vue"
-
 </script>
-
-<style scoped>
-.app {
-  margin: auto 550px;
-}
-</style>
