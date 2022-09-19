@@ -1,10 +1,18 @@
 import axios from "axios";
+import ProjectService from "@/services/project";
+import FormType from "@/types/form";
+import ResponseData from "@/types/response";
 
+interface formType {
+  id?: any,
+  title: string,
+  description: string,
+  completed?: boolean
+}
 
 const useProjects = () => {
-  const url = "http://localhost:3000/projects/"
   const getData = async () => {
-    const projects = axios.get(url)
+    const projects = ProjectService.getProjects()
       .then((response) => {
         return response.data;
       })
@@ -14,18 +22,14 @@ const useProjects = () => {
     return projects;
   }
 
-  const addProjects = async (
-    id: string,
-    title: string,
-    description: string,
-    completed: boolean,
-  ) => {
-    const projects = axios.post(url, {
-      id: id,
+  const addProjects = async (id: any, title: string, description: string, completed?: boolean) => {
+    const data: formType = {
       title: title,
       description: description,
       completed: completed
-    })
+    }
+    const projects = ProjectService
+    .createProjectApi(data)
       .catch((e) => {
         throw e;
       })
@@ -33,13 +37,12 @@ const useProjects = () => {
   }
   
   const getProject = async (
-      id: any
+      id: any,
     )  => {
-    const projects = axios.get(url)
+    const projects = ProjectService.getProjectApi(id)
       .then((response) => {
         let projects = response.data;
-        const getProject = projects.find((item:any) => item.id === id)
-        return getProject;
+        return projects;
       })
       .catch((e) => {
         throw e;
@@ -48,7 +51,7 @@ const useProjects = () => {
   };
 
   const deleteProject = async (id: any) => {
-    const projects = axios.delete(url+id)
+    const projects = ProjectService.deleteProjectApi(id)
       .then((response) => {
         return response.data;
       })
@@ -58,14 +61,18 @@ const useProjects = () => {
     return projects;
   }
 
-  const updateProject = async (id: any, 
+  const updateProject = async (
+      id: any, 
       title: string,
-      description: string
+      description: string,
+      completed?: boolean,
     ) => {
-    const editProject = axios.put(url+id, {
+    const data = {
       title: title,
-      description: description
-    })
+      description: description,
+      completed: completed
+    }
+    const editProject = ProjectService.updateProjectApi(id, data)
     .then((response) => {
       return response;
     })
@@ -75,12 +82,34 @@ const useProjects = () => {
   return editProject;
   }
 
+  const updateStatus = async (
+    id: any, 
+    title: string,
+    description: string,
+    completed: boolean
+    ) => {
+    const data = {
+      title: title,
+      description: description,
+      completed: completed
+    }
+    const project = ProjectService.updateProjectApi(id, data)
+    .then((response) => {
+      return response;
+    })
+    .catch((e) => {
+      throw e;
+    })
+    return project;
+  } 
+
   return {
     getData,
     addProjects,
     deleteProject,
     getProject,
-    updateProject
+    updateProject,
+    updateStatus
   }
 }
 
