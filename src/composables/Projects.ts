@@ -1,6 +1,4 @@
-import axios from "axios";
 import ProjectService from "@/services/project";
-import FormType from "@/types/form";
 import ResponseData from "@/types/response";
 
 interface formType {
@@ -40,7 +38,7 @@ const useProjects = () => {
       id: any,
     )  => {
     const projects = ProjectService.getProjectApi(id)
-      .then((response) => {
+      .then((response: ResponseData) => {
         let projects = response.data;
         return projects;
       })
@@ -52,7 +50,7 @@ const useProjects = () => {
 
   const deleteProject = async (id: any) => {
     const projects = ProjectService.deleteProjectApi(id)
-      .then((response) => {
+      .then((response: ResponseData) => {
         return response.data;
       })
       .catch((e) => {
@@ -73,7 +71,7 @@ const useProjects = () => {
       completed: completed
     }
     const editProject = ProjectService.updateProjectApi(id, data)
-    .then((response) => {
+    .then((response: ResponseData) => {
       return response;
     })
     .catch((e) => {
@@ -94,7 +92,7 @@ const useProjects = () => {
       completed: completed
     }
     const project = ProjectService.updateProjectApi(id, data)
-    .then((response) => {
+    .then((response: ResponseData) => {
       return response;
     })
     .catch((e) => {
