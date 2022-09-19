@@ -7,8 +7,7 @@ class ProjectForm {
   completed?: boolean
 }
 
-
-class ProjectService {
+class ProjectService extends ProjectForm{
   getProjects(): Promise<any> {
     return http.get("/projects");
   }
