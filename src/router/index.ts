@@ -1,16 +1,11 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import HomeView from "@/views/HomeView.vue";
-import TaskForm from "@/components/TaskForm.vue";
-import EditProject from "@/components/EditForm.vue";
-import SignIn from "@/views/SignIn.vue";
-import Register from "@/views/Register.vue";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "home",
-    component: HomeView,
+    component: () => import("@/views/HomeView.vue"),
     meta: {
       requiresAuth: true
     }
@@ -18,22 +13,28 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/project",
     name: "project",
-    component: TaskForm,
+    component: () => import("@/components/TaskForm.vue"),
   },
   {
     path: "/project/:id",
     name: "editProject",
-    component: EditProject
+    component: () => import("@/components/EditForm.vue")
   },
   {
     path: "/register",
     name: "register",
-    component: Register
+    component: () => import("@/views/Register.vue"),
+    meta: {
+      hideNavbar: true
+    }
   },
   {
     path: "/login",
     name: "login",
-    component: SignIn
+    component: () => import("@/views/SignIn.vue"),
+    meta: {
+      hideNavbar: true
+    }
   },
 ];
 
