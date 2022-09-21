@@ -7,8 +7,6 @@
       <div class="flex space-x-4">
         <router-link to="/" v-if="isLoggedIn">List</router-link>
         <router-link to="/project" v-if="isLoggedIn">Projects</router-link>
-        <router-link to="/register" v-if="!isLoggedIn">Register</router-link>
-        <router-link to="/login" v-if="!isLoggedIn">Login</router-link>
         <button @click="logoutUser" v-if="isLoggedIn" class="uppercase pr-2">Sign Out</button>
       </div>
     </div>
