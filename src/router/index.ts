@@ -7,18 +7,24 @@ const routes: Array<RouteRecordRaw> = [
     name: "home",
     component: () => import("@/views/HomeView.vue"),
     meta: {
-      requiresAuth: true
+      requiresAuth: true,
     }
   },
   {
     path: "/project",
     name: "project",
     component: () => import("@/components/TaskForm.vue"),
+    meta: {
+      requiresAuth: true,
+    }
   },
   {
-    path: "/project/:id",
+    path: "/:id",
     name: "editProject",
-    component: () => import("@/components/EditForm.vue")
+    component: () => import("@/components/EditForm.vue"),
+    meta: {
+      requiresAuth: true 
+    }
   },
   {
     path: "/register",
@@ -35,6 +41,10 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       hideNavbar: true
     }
+  },
+  { 
+    path: '/:pathMatch(.*)*', 
+    redirect: "/login",
   },
 ];
 
@@ -56,9 +66,9 @@ const getCurrentUser = () => {
   })
 }
 
-router.beforeEach(async (to, from, next) => {
-  if(to.matched.some((record:any) => record.meta.requiresAuth)) {
-    if(await getCurrentUser) {
+router.beforeEach(async (to, _from, next) => {
+  if(to.matched.some(record => record.meta.requiresAuth)) {
+    if(await getCurrentUser()) {
       next();
     } else {
       next("/login")
