@@ -1,4 +1,10 @@
 <template>
+  <transition name="fade">
+    <AlertMessage 
+      :type="type"
+      :message="message"
+      v-if="alert"/>
+  </transition>
   <h1 class="text-3xl font-bold text-center mt-5 mb-5">Create Project </h1> 
   <div class="form-section">
     <div class="container sm:px-2">
@@ -14,12 +20,15 @@
 </template>
 
 <script lang="ts" setup>
+import AlertMessage from "./AlertMessage.vue";
 import useProjects from "@/composables/Projects";
 import { reactive, ref, computed } from "vue";
 import { useRouter } from 'vue-router'
-import { v4 as uuidv4 } from "uuid";
 const { addProjects } = useProjects();
 const router = useRouter();
+const alert = ref(false);
+const message = ref();
+const type = ref();
 
 interface Task {
   name: string,
@@ -32,19 +41,47 @@ const form = reactive({
   completed: false
 });
 
+const rules = {
+  title: [
+    {
+      required: true,
+      message: "Please enter a title",
+      trigger: "blur"
+    }
+  ],
+  description: [
+    {
+      required: true,
+      message: "Please enter a description",
+      trigger: "blur"
+    }
+  ],
+}
+
 const submitTask = async () => {
   if (form.title === "" && form.description === "") {
     return;
   } else {
     try {
       await addProjects(
-        uuidv4,
         form.title,
         form.description,
         form.completed
       )
-      router.push("/")
+      alert.value = true
+      message.value = "Successfully added"
+      type.value = "success"
+      setTimeout(() => {
+        router.push("/")
+        alert.value = false
+      }, 3000)
     } catch (e) {
+      alert.value = true
+      message.value = e.message
+      type.value = "danger"
+      setTimeout(() => {
+        alert.value = false
+      }, 3000)
       console.log(e)
     }
   }
@@ -64,10 +101,28 @@ h1 {
   background-color: #0a81d1;
   color: white;
 }
-.fade-enter-active {
-  animation: bounce-in 0.5s;
-}
+
+.fade-move,
+.fade-enter-active,
 .fade-leave-active {
-  animation: bounce-in 0.5s reverse;
+  transition: all 0.5s ease-in-out;
 }
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(-50px);
+}
+
+.fade-enter-to {
+  opacity: 1;
+}
+
+
+.fade-leave-from {
+  opacity: 1;
+}
+
+
+
 </style>
