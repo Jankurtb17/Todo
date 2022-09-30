@@ -2,14 +2,14 @@
   <div class="project shadow py-5 px-10 mt-3 rounded border " >
     <div class="actions flex justify-between">
       <h3 @click="showDetails = !showDetails" class="cursor-pointer">{{props.project.title}}</h3>
-      <div>
-        <span class="material-icons cursor-pointer done px-1 text-lime-600 hover:text-lime-700" @click="completeTask(props.project.id)">done</span>
-        <span class="material-icons cursor-pointer edit px-1 text-yellow-500 hover:text-yellow-600"><router-link :to="{ name: 'editProject', params: {id: props.project.id}}">edit</router-link></span>
-        <span class="material-icons cursor-pointer delete px-1 text-red-600 hover:text-red-800" @click="deleteTask(props.project.id)">delete</span>
+      <div v-if="!props.project.completed">
+        <span class="material-icons cursor-pointer done px-1 text-lime-600 hover:text-lime-700" @click="completeTask(props.project._id)">done</span>
+        <span class="material-icons cursor-pointer edit px-1 text-yellow-500 hover:text-yellow-600"><router-link :to="{ name: 'editProject', params: {id: props.project._id}}">edit</router-link></span>
+        <span class="material-icons cursor-pointer delete px-1 text-red-600 hover:text-red-800" @click="deleteTask(props.project._id)">delete </span>
       </div>
     </div>
     <transition name="fade">
-      <div class="details" v-if="showDetails">
+      <div class="details " v-if="showDetails">
         <p>{{props.project.description}}</p>
       </div>
     </transition>
@@ -29,10 +29,10 @@ const emit = defineEmits<{
 const showDetails = ref(false);
 const completed = ref(false);
 
-const completeTask = (id: any) => {
+const completeTask = (_id: any) => {
   completed.value = true
   const task = {
-    id: id,
+    _id: _id,
     title: props.project.title,
     description: props.project.description,
     completed: completed.value
