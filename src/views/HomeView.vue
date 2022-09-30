@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <h1 class="text-3xl font-bold sm:text-center md:text-center text-center mt-5 mb-5">Project List</h1>
-    
+    <h1 class="text-3xl font-bold sm:text-center md:text-center text-center mt-5 mb-5">{{day}}</h1>
+    <h1 class="text-3xl font-bold sm:text-center md:text-center text-center mt-5 mb-5">{{date}}</h1>
     <div v-if="isLoading">
       <Loading 
         :item="getLength"
@@ -13,30 +13,28 @@
           <div class="ongoing mx-20 sm:mx-2 sm:mb-4">
             <TransitionGroup name="fade" tag="p">
               <p class="uppercase text-sm font-bold text-gray-400 tracking-wide">Ongoing</p>
-              <span class="list-items" v-for="project in projects" :key="project.id">
-                <div v-if="!project.completed" class="w-full">
-                  <SingleProject
-                    :project="project"
-                    @openDialog="openModal"
-                    @deleteProj="deleteProjects"
-                    @task="completeTask"
-                  />
-                </div>
+              <span class="list-items" v-for="project in projects" :key="project._id">
+                <SingleProject
+                  v-if="!project.completed"
+                  :project="project"
+                  @openDialog="openModal"
+                  @deleteProj="deleteProjects"
+                  @task="completeTask"
+                />
               </span>
             </TransitionGroup>
           </div>
           <div class="completed mx-20 sm:mx-2">
             <TransitionGroup name="fade" tag="p">
               <p class="uppercase text-sm font-bold text-gray-400 tracking-wide">Completed</p>
-              <span class="list-items" v-for="project in projects" :key="project.id">
-                <div v-if="project.completed">
+              <span class="list-items line-through" v-for="project in projects" :key="project._id">
                   <SingleProject
+                    v-if="project.completed"
                     :project="project"
                     @openDialog="openModal"
                     @deleteProj="deleteProjects"
                     @task="completeTask"
                   />
-                </div>
               </span>
             </TransitionGroup>
           </div>
@@ -71,6 +69,7 @@ import useProjects from "@/composables/Projects";
 import SingleProject from "@/components/SingleProject.vue";
 import Loading from "@/components/LoadingComponent.vue";
 import Modal from "@/components/ModalComponent.vue";
+import AlertMessage from "@/components/AlertMessage.vue";
 const { getData, deleteProject, updateStatus } = useProjects();
 const projects = ref([] as Projects[]);
 const isLoading = ref(false);
@@ -79,8 +78,16 @@ const updateModal = ref(false);
 const delId = ref();
 let completed = ref(false);
 
+const getDate = new Date();
+const day = getDate.toLocaleDateString(
+  'default', {
+    weekday: 'long'
+  }
+);
+
+
 type Projects = {
-  id: string,
+  _id?: string,
   title: string,
   description: string,
   completed: boolean
@@ -97,7 +104,7 @@ const updateDialog = () => {
 const completeTask = async (task: any) => {
   isLoading.value = true
   await updateStatus(
-    task.id, 
+    task._id, 
     task.title,
     task.description,
     task.completed
