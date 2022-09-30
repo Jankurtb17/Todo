@@ -20,7 +20,7 @@ const useProjects = () => {
     return projects;
   }
 
-  const addProjects = async (id: any, title: string, description: string, completed?: boolean) => {
+  const addProjects = async (title: string, description: string, completed?: boolean) => {
     const data: formType = {
       title: title,
       description: description,
@@ -75,7 +75,8 @@ const useProjects = () => {
       return response;
     })
     .catch((e) => {
-      throw e;
+      console.log(e.message)
+      throw new Error(e);
     })
   return editProject;
   }
