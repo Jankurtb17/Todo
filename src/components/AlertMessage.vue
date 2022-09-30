@@ -1,27 +1,38 @@
 <template>
-  <div class="alert" :class="props.type">
-    <div class="flex justify-between">
+  <div class="alert w-48" >
+    <div class="flex justify-between  px-2 py-5 text-white rounded" :class="bgColor">
       <div class="message">
-        {{props.message}}
+          {{props.message}}
       </div>
-      <div class="button">
-        <Xmark/>
-      </div>
+      <span class="material-icons pr-1">close</span>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { Xmark } from '@heroicons/vue/24/solid';
+import { computed } from '@vue/reactivity';
 const props = defineProps(["type", "message"])
+
+const bgColor = computed(() => {
+  return props.type === 'success' ? 'bg-green-300' : 'bg-red-300'
+})
 
 </script>
 
-<style>
+<style scoped>
 .alert-success {
   background-color: #d4edda;
   border-color: #c3e6cb;
   color: #155724;
+}
+
+.alert {
+  margin: 0 280px;
+  position: absolute;
+}
+
+.material-icons {
+  font-size: 19px;
 }
 
 </style>
