@@ -5,15 +5,14 @@
       :message="message"
       v-if="alert"/>
   </transition>
-  <h1 class="text-3xl font-bold text-center mt-5 mb-5">Create Project </h1> 
+  <!-- {{displayUser}} -->
+  <h1 class="text-3xl text-gray-500 font-bold text-center mt-5 mb-5">Create Task </h1> 
   <div class="form-section">
     <div class="container sm:px-2">
-      <form @submit.prevent>
-        <h1 class="text-sm uppercase">Title</h1>
-        <input type="text" v-model="form.title" class="mb-5 sm:w-full md:w-full w-full border border-slate-300 rounded-md py-2 pl-2 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"/>
-        <h1 class="text-sm uppercase">Description</h1>
-        <textarea v-model="form.description" class="mb-5 w-full border border-slate-300 rounded-md py-2 pl-2 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"/>
-        <button class="button w-full rounded py-2" @click="submitTask">Add Task</button>
+      <form @submit.prevent class="grid justify-items-center">
+        <input type="text" v-model="form.title" class="mb-5 sm:w-full md:w-full lg:w-10/12 border border-slate-300 rounded-md py-2 pl-2 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm" placeholder="Title"/>
+        <textarea placeholder="Description" v-model="form.description" class="mb-5 sm:w-full md:w-full lg:w-10/12 border border-slate-300 rounded-md py-2 pl-2 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"/>
+        <button class="button lg:w-10/12 sm:w-full md:w-full rounded py-2" @click="submitTask">Add Task</button>
       </form>
     </div>
   </div>
@@ -22,23 +21,28 @@
 <script lang="ts" setup>
 import AlertMessage from "./AlertMessage.vue";
 import useProjects from "@/composables/Projects";
+// import { useStore } from "@/store/index"
 import { reactive, ref, computed } from "vue";
 import { useRouter } from 'vue-router'
+import { storeToRefs } from "pinia";
 const { addProjects } = useProjects();
 const router = useRouter();
 const alert = ref(false);
 const message = ref();
 const type = ref();
-
+// const store = useStore()
+// const { displayUser } = storeToRefs(store)
 interface Task {
   name: string,
   description: string
+  author: string
 }
 const task = ref([] as Task[]);
 const form = reactive({
   title: "",
   description: "",
-  completed: false
+  completed: false,
+  author: ""
 });
 
 const rules = {
@@ -66,7 +70,7 @@ const submitTask = async () => {
       await addProjects(
         form.title,
         form.description,
-        form.completed
+        form.completed,
       )
       alert.value = true
       message.value = "Successfully added"
@@ -94,11 +98,11 @@ const length = computed(() => {
 </script>
 
 <style scoped>
-h1 {
+/* h1 {
   color: #314cb6;
-}
+} */
 .button {
-  background-color: #0a81d1;
+  background-color: #749F82;
   color: white;
 }
 

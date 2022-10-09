@@ -1,5 +1,5 @@
 <template>
-  <div class="border shadow py-3 px-10 rounded border ">
+  <div class="border shadow py-2 mr-5 ml-5 px-10 rounded lg:w-10/12 sm:w-full md:w-full border ">
     <div class="animate-pulse flex space-x-4" >
       <div class="flex-1 space-y-6 py-1">
         <div class="h-2 bg-slate-200 rounded"></div>

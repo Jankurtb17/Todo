@@ -1,12 +1,10 @@
 <template>
-  <nav class="py-5 uppercase text-white ">
+  <nav class="bg-gray-600 py-5 uppercase text-white ">
     <div class="container mx-auto flex justify-between font-bold w-full">
       <div>
         <router-link to="/" class="px-2">jfetm</router-link>
       </div>
       <div class="flex space-x-4">
-        <router-link to="/" v-if="isLoggedIn">List</router-link>
-        <router-link to="/project" v-if="isLoggedIn">Projects</router-link>
         <button @click="logoutUser" v-if="isLoggedIn" class="uppercase pr-2">Sign Out</button>
       </div>
     </div>
@@ -42,8 +40,8 @@ onMounted(() => {
 </script>
 
 <style scoped>
-nav {
+/* nav {
   background-color: #314cb6;
-}
+} */
 
 </style>

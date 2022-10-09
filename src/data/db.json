@@ -1,10 +1,28 @@
 {
   "projects": [
     {
-      "id": "1",
-      "title": "Meeting",
-      "description": "Toolbox meeting every day starting at 7:55 am",
-      "completed": false
+      "title": "Sample task 1",
+      "description": "THis is just an example task\n",
+      "completed": false,
+      "id": "asg2d"
+    },
+    {
+      "title": "sample 2",
+      "description": "task 2\neee",
+      "completed": false,
+      "id": "s2fsc2h"
+    },
+    {
+      "title": "eewew",
+      "description": "wsxc",
+      "completed": true,
+      "id": "n5XzmKc"
+    },
+    {
+      "title": "sampleee project",
+      "description": "eeeeeeee",
+      "completed": true,
+      "id": "yIIn1Sg"
     }
   ]
 }

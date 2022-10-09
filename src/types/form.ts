@@ -1,6 +1,7 @@
 export default interface FormType {
-  id: any,
+  _id: any,
   title: string,
   description: string,
-  completed?: boolean
+  completed?: boolean,
+  author: string
 }

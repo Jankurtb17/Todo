@@ -1,46 +1,29 @@
 <template>
   <div class="home">
-    <h1 class="text-3xl font-bold sm:text-center md:text-center text-center mt-5 mb-5">{{day}}</h1>
-    <h1 class="text-3xl font-bold sm:text-center md:text-center text-center mt-5 mb-5">{{date}}</h1>
-    <div v-if="isLoading">
-      <Loading 
-        :item="getLength"
-      />
-    </div>
-    <div v-else>
-      <div class="projects-ongoing">
-        <div v-if="projects.length">
-          <div class="ongoing mx-20 sm:mx-2 sm:mb-4">
-            <TransitionGroup name="fade" tag="p">
-              <p class="uppercase text-sm font-bold text-gray-400 tracking-wide">Ongoing</p>
-              <span class="list-items" v-for="project in projects" :key="project._id">
-                <SingleProject
-                  v-if="!project.completed"
-                  :project="project"
-                  @openDialog="openModal"
-                  @deleteProj="deleteProjects"
-                  @task="completeTask"
-                />
-              </span>
-            </TransitionGroup>
-          </div>
-          <div class="completed mx-20 sm:mx-2">
-            <TransitionGroup name="fade" tag="p">
-              <p class="uppercase text-sm font-bold text-gray-400 tracking-wide">Completed</p>
-              <span class="list-items line-through" v-for="project in projects" :key="project._id">
+    <div class="lower-item ">
+      <div v-if="isLoading" class="mt-5 grid justify-items-center">
+          <Loading />
+      </div>
+      <div v-else>
+        <div class="projects-ongoing mt-5" >
+          <div v-if="projects.length">
+            <div class="ongoing mx-20 sm:mx-2 sm:mb-4">
+              <TransitionGroup name="fade" tag="p">
+                <span class="list-items grid justify-items-center" v-for="project in projects" :key="project._id">
                   <SingleProject
-                    v-if="project.completed"
+                    v-if="!project.completed"
                     :project="project"
                     @openDialog="openModal"
                     @deleteProj="deleteProjects"
                     @task="completeTask"
                   />
-              </span>
-            </TransitionGroup>
+                </span>
+              </TransitionGroup>
+            </div>
           </div>
-        </div>
-        <div v-else>
-          <p class="text-gray-400">Wohooo, nothing left on task</p>
+          <div v-else>
+            <p class="text-gray-400">Wohooo, nothing left on task</p>
+          </div>
         </div>
       </div>
     </div>
@@ -70,7 +53,9 @@ import SingleProject from "@/components/SingleProject.vue";
 import Loading from "@/components/LoadingComponent.vue";
 import Modal from "@/components/ModalComponent.vue";
 import AlertMessage from "@/components/AlertMessage.vue";
+import { useRouter } from "vue-router";
 const { getData, deleteProject, updateStatus } = useProjects();
+const router = useRouter();
 const projects = ref([] as Projects[]);
 const isLoading = ref(false);
 const deleteModal = ref(false);
@@ -78,12 +63,7 @@ const updateModal = ref(false);
 const delId = ref();
 let completed = ref(false);
 
-const getDate = new Date();
-const day = getDate.toLocaleDateString(
-  'default', {
-    weekday: 'long'
-  }
-);
+
 
 
 type Projects = {
@@ -102,7 +82,6 @@ const updateDialog = () => {
 }
 
 const completeTask = async (task: any) => {
-  isLoading.value = true
   await updateStatus(
     task._id, 
     task.title,
@@ -110,8 +89,7 @@ const completeTask = async (task: any) => {
     task.completed
   )
   completed.value = true;
-  isLoading.value = false;
-  displayProjects() 
+  router.push('/task-completed')
 } 
 
 const displayProjects = async () => {
@@ -147,13 +125,10 @@ onMounted(() => {
 </script>
 
 <style scoped>
-h1 {
-  color: #314cb6;
+#date {
+  font-family: 'Roboto ', sans-serif;
 }
 
-.ongoing {
-  min-height: 40vh;
-}
 
 .fade-enter-from {
   opacity: 0;
@@ -182,4 +157,6 @@ h1 {
 .fade-leave-active {
   transition: all 0.4s ease;
 }
+
+
 </style>

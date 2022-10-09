@@ -49,8 +49,7 @@ let login = ref<SignIn>({
 const loginUser = () => {
   const auth = getAuth()
   signInWithEmailAndPassword(auth, login.value.email, login.value.password)
-  .then((data) => {
-    console.log(data);
+  .then(() => {
     router.push("/")
   })
   .catch((error) => {

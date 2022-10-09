@@ -1,31 +1,32 @@
 import http from "@/http-common"
 
 class ProjectForm {
-  id?: any
+  _id?: any
   title!: string
   description!: string
+  author!: string
   completed?: boolean
 }
 
 class ProjectService extends ProjectForm{
   getProjects(): Promise<any> {
-    return http.get("/projects");
+    return http.get("/");
   }
 
-  getProjectApi(id: any): Promise<any> {
-    return http.get(`/projects/${id}`)
+  getProjectApi(_id: any): Promise<any> {
+    return http.get(`/${_id}`)
   }
 
   createProjectApi(ProjectForm: ProjectForm): Promise<any> {
-    return http.post("/projects", ProjectForm);
+    return http.post("/", ProjectForm);
   }
 
-  updateProjectApi(id: any, ProjectForm: ProjectForm): Promise<any> {
-    return http.put(`/projects/${id}`, ProjectForm)
+  updateProjectApi(_id: any, ProjectForm: ProjectForm): Promise<any> {
+    return http.put(`/${_id}`, ProjectForm)
   }
 
-  deleteProjectApi(id: any): Promise<any> {
-    return http.delete(`/projects/${id}`)
+  deleteProjectApi(_id: any): Promise<any> {
+    return http.delete(`/${_id}`)
   }
 }
 

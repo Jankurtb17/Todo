@@ -19,6 +19,14 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
+    path: "/task-completed",
+    name: "task-completed",
+    component: () => import("@/components/TaskCompleted.vue"),
+    meta: {
+      requiresAuth: true 
+    }
+  },
+  {
     path: "/:id",
     name: "editProject",
     component: () => import("@/components/EditForm.vue"),
@@ -31,7 +39,8 @@ const routes: Array<RouteRecordRaw> = [
     name: "register",
     component: () => import("@/views/Register.vue"),
     meta: {
-      hideNavbar: true
+      hideNavbar: true,
+      hideMainLogo: true
     }
   },
   {
@@ -39,7 +48,8 @@ const routes: Array<RouteRecordRaw> = [
     name: "login",
     component: () => import("@/views/SignIn.vue"),
     meta: {
-      hideNavbar: true
+      hideNavbar: true,
+      hideMainLogo: true
     }
   },
   { 

@@ -3,28 +3,29 @@
     <AlertMessage 
       :type="type"
       :message="message"
-      v-if="alert"/>
+      v-if="alert"
+      />
   </transition>
-  <h1 class="text-3xl font-bold text-center mt-5 mb-5">Edit Project </h1> 
+  <h1 class="text-3xl font-bold text-gray-500 text-center mt-5 mb-5">Edit Task </h1> 
   <div class="form-section">
-    <div class="container sm:px-2">
-      <form @submit.prevent="updateProjects">
-        <h1 class="text-sm uppercase">Title</h1>
+    <div class="sm:px-2 ">
+      <form @submit.prevent="updateProjects" class="grid justify-items-center" >
         <input 
           type="text" 
           v-model="form.title" 
-          class="mb-5 w-full border border-slate-300 rounded-md py-2 pl-2 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
+          class="mb-5 sm:w-full md:w-full  lg:w-10/12 border border-slate-300 rounded-md py-2 pl-2 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
           @keyup="validateInput"
+          placeholder="Title"
         />
         <span v-if="titleErr" class="mt-5">{{titleMsg}}</span>
-        <h1 class="text-sm uppercase">Description</h1>
         <textarea 
           v-model="form.description" 
-          class="mb-5 w-full border border-slate-300 rounded-md py-2 pl-2 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
+          class="mb-5 sm:w-full md:w-full  lg:w-10/12 border border-slate-300 rounded-md py-2 pl-2 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
           @keyup="validateInput"  
+          placeholder="Description"
         />
         <span v-if="descErr">{{descMsg}}</span>
-        <button class="button w-full rounded py-2">Update Task</button>
+        <button class="button sm:w-full md:w-full  lg:w-10/12 rounded py-2">Update Task</button>
       </form>
     </div>
   </div>
@@ -112,11 +113,8 @@ onMounted(() => {
 </script>
 
 <style scoped>
-h1 {
-  color: #314cb6;
-}
 .button {
-  background-color: #0a81d1;
+  background-color: #F1A661;
   color: white;
 }
 

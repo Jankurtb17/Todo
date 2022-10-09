@@ -1,6 +1,6 @@
 <template>
-  <div class="alert w-48" >
-    <div class="flex justify-between  px-2 py-5 text-white rounded" :class="bgColor">
+  <div class="alert grid justify-items-center" >
+    <div class="flex justify-between lg:w-10/12 px-2 py-5 text-white rounded" :class="bgColor">
       <div class="message">
           {{props.message}}
       </div>
@@ -26,10 +26,9 @@ const bgColor = computed(() => {
   color: #155724;
 }
 
-.alert {
-  margin: 0 280px;
+/* .alert {
   position: absolute;
-}
+} */
 
 .material-icons {
   font-size: 19px;

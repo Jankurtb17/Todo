@@ -5,7 +5,8 @@ interface formType {
   id?: any,
   title: string,
   description: string,
-  completed?: boolean
+  author: string,
+  completed?: boolean,
 }
 
 const useProjects = () => {
@@ -20,11 +21,12 @@ const useProjects = () => {
     return projects;
   }
 
-  const addProjects = async (title: string, description: string, completed?: boolean) => {
+  const addProjects = async (title: string, description: string, author: string, completed?: boolean) => {
     const data: formType = {
       title: title,
       description: description,
-      completed: completed
+      author: author,
+      completed: completed,
     }
     const projects = ProjectService
     .createProjectApi(data)
@@ -63,11 +65,13 @@ const useProjects = () => {
       id: any, 
       title: string,
       description: string,
+      author: string,
       completed?: boolean,
     ) => {
     const data = {
       title: title,
       description: description,
+      author: author,
       completed: completed
     }
     const editProject = ProjectService.updateProjectApi(id, data)
@@ -85,11 +89,13 @@ const useProjects = () => {
     id: any, 
     title: string,
     description: string,
+    author: string,
     completed: boolean
     ) => {
     const data = {
       title: title,
       description: description,
+      author: author,
       completed: completed
     }
     const project = ProjectService.updateProjectApi(id, data)
