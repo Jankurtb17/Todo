@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const helment = require('helmet')
+const helmet = require('helmet')
 const app = express();
 
 //Middleware
