@@ -21,6 +21,7 @@ router.post('/', async(req, res) => {
     title: req.body.title,
     description: req.body.description,
     completed: req.body.completed,
+    author: req.body.author,
     createdAt: new Date()
   })
   res.status(201).send()

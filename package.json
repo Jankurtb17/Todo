@@ -17,8 +17,7 @@
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "helmet": "^6.0.0",
-    "mongodb": "^4.10.0",
-    "pinia": "^2.0.23"
+    "mongodb": "^4.10.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
