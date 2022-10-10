@@ -79,14 +79,14 @@ const submitTask = async () => {
         router.push("/")
         alert.value = false
       }, 3000)
-    } catch (error) {
+    } catch (e) {
       alert.value = true
-      message.value = error.message
+      message.value = e.message
       type.value = "danger"
       setTimeout(() => {
         alert.value = false
       }, 3000)
-      console.log(error)
+      console.log(e)
     }
   }
 };
