@@ -7,7 +7,7 @@
       <TransitionGroup name="fade" tag="p">
         <span class="list-items grid justify-items-center" v-for="project in projects" :key="project._id">
           <SingleProject
-            v-if="project.completed"
+            v-if="project.completed && project.author === store.getUser()"
             :project="project"
           />
         </span>
@@ -21,6 +21,8 @@ import useProjects from "@/composables/Projects"
 import { onMounted, ref } from "vue";
 import LoadingComponent from "./LoadingComponent.vue";
 import SingleProject from "./SingleProject.vue";
+import { useStore } from "@/store/index"
+const store = useStore();
 const { getData } = useProjects();
 const isLoading = ref(false);
 
@@ -28,6 +30,7 @@ type Projects = {
   _id?: string,
   title: string,
   description: string,
+  author: string,
   completed: boolean
 }
 

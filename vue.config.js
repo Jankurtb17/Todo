@@ -12,5 +12,16 @@ module.exports = defineConfig({
   transpileDependencies: true,
   chainWebpack: config => {
     config.module.rules.delete('eslint');
-}
+  },
+  configureWebpack: {
+    module: {
+      rules: [
+        {
+          test: /\.mjs$/,
+          include: /node_modules/,
+          type: "javascript/auto"
+        }
+      ] 
+    }
+  }
 });

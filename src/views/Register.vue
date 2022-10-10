@@ -1,6 +1,6 @@
 <template>
-  <div class="grid grid-cols-12 mt-40 border" id="register-wrapper">
-    <div class="col-span-6 bg-gray-200  flex items-center flex-col">
+  <div class="grid lg:grid-cols-12 md:grid-cols-12 lg:mt-40 md:mt-60 md:mx-4 sm:mt-0 sm:grid-cols-1 border md:border sm:border-0" id="register-wrapper">
+    <div class="sm:hidden md:flex lg:flex col-span-6 bg-gray-200 items-center flex-col">
       <h1 class="text-2xl  mt-10 py-5">JFE Techno Manila</h1>
       <img src="@/assets/team.svg" class=""/>
     </div>

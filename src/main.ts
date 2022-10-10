@@ -5,6 +5,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import './index.css'
 import { initializeApp } from "firebase/app";
+import { createPinia } from "pinia";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -22,9 +23,10 @@ const firebaseConfig = {
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
-
+const pinia = createPinia()
 const app = createApp(App)
 
+app.use(pinia)
 app.use(router)
 app.mount("#app");
 app.use(VueAxios, axios)

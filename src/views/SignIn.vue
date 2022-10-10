@@ -1,10 +1,10 @@
 <template>
-  <div class="grid grid-cols-12 mt-40 " id="login-wrapper">
-    <div class="col-span-6 bg-gray-200  flex items-center flex-col">
+  <div class="grid lg:grid-cols-12 md:grid-cols-12 lg:mt-40 md:mt-60 md:mx-4 sm:mt-0 sm:grid-cols-1 border md:border sm:border-0" id="login-wrapper">
+    <div class="sm:hidden md:flex lg:flex col-span-6 bg-gray-200 items-center flex-col">
       <h1 class="text-2xl  mt-10 py-5">JFE Techno Manila</h1>
       <img src="@/assets/team.svg" class=""/>
     </div>
-    <div class="flex flex-col col-span-6 px-5 py-5">
+    <div class="flex flex-col col-span-6 px-5 py-5 sm:py-0">
       <form @submit.prevent>
         <h1 class="text-3xl mt-10 mb-20 text-center font-medium">Welcome Back</h1>
         <div @click="signInWithGoogle" class="flex items-center justify-center w-full shadow-md border-solid border-2 border-gray-100 py-3 uppercase text-blue-800 font-bold text-sm rounded cursor-pointer mb-5">
@@ -98,7 +98,7 @@ const signInWithGoogle = () => {
   const provider = new GoogleAuthProvider();
   signInWithPopup(getAuth(), provider)
     .then((result) => {
-      console.log(result.user.displayName);
+      console.log(result.user.email);
       router.push("/");
     })
     .catch((error) => {
@@ -109,10 +109,7 @@ const signInWithGoogle = () => {
 </script>
 
 <style scoped>
-#login-wrapper {
-  border: 1px solid lightgray;
-  min-height: 55vh;
-}
+
 
 h1 {
   font-family: 'Roboto';

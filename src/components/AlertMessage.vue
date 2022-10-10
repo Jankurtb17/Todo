@@ -14,7 +14,7 @@ import { computed } from '@vue/reactivity';
 const props = defineProps(["type", "message"])
 
 const bgColor = computed(() => {
-  return props.type === 'success' ? 'bg-green-300' : 'bg-red-300'
+  return props.type === 'success' ? 'bg-green-800' : 'bg-red-300'
 })
 
 </script>

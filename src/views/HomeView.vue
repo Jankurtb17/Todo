@@ -11,7 +11,7 @@
               <TransitionGroup name="fade" tag="p">
                 <span class="list-items grid justify-items-center" v-for="project in projects" :key="project._id">
                   <SingleProject
-                    v-if="!project.completed"
+                    v-if="!project.completed && project.author === store.getUser()"
                     :project="project"
                     @openDialog="openModal"
                     @deleteProj="deleteProjects"
@@ -22,7 +22,7 @@
             </div>
           </div>
           <div v-else>
-            <p class="text-gray-400">Wohooo, nothing left on task</p>
+            <p class="text-gray-400 text-center">Wohooo, nothing left on task</p>
           </div>
         </div>
       </div>
@@ -54,6 +54,8 @@ import Loading from "@/components/LoadingComponent.vue";
 import Modal from "@/components/ModalComponent.vue";
 import AlertMessage from "@/components/AlertMessage.vue";
 import { useRouter } from "vue-router";
+import { useStore } from "@/store/index"
+const store = useStore()
 const { getData, deleteProject, updateStatus } = useProjects();
 const router = useRouter();
 const projects = ref([] as Projects[]);
@@ -63,13 +65,11 @@ const updateModal = ref(false);
 const delId = ref();
 let completed = ref(false);
 
-
-
-
 type Projects = {
   _id?: string,
   title: string,
   description: string,
+  author: string,
   completed: boolean
 }
 
@@ -86,15 +86,18 @@ const completeTask = async (task: any) => {
     task._id, 
     task.title,
     task.description,
+    task.author,
     task.completed
   )
   completed.value = true;
   router.push('/task-completed')
 } 
 
-const displayProjects = async () => {
+const displayProjects = () => {
   isLoading.value = true;
-  projects.value = await getData();
+  setTimeout(async() => {
+    projects.value = await getData();
+  }, 3000)
   isLoading.value = false;
   deleteModal.value = false;
 }
@@ -118,8 +121,10 @@ const getLength = computed(() => {
   return projects.value.length;
 })
 
+
 onMounted(() => {
   displayProjects();
+  // console.log(store.getUser())
 })
 
 </script>

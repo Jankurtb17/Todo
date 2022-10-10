@@ -21,17 +21,15 @@
 <script lang="ts" setup>
 import AlertMessage from "./AlertMessage.vue";
 import useProjects from "@/composables/Projects";
-// import { useStore } from "@/store/index"
-import { reactive, ref, computed } from "vue";
+import { useStore } from "@/store/index"
+import { reactive, ref, computed, onMounted } from "vue";
 import { useRouter } from 'vue-router'
-import { storeToRefs } from "pinia";
+const store = useStore()
 const { addProjects } = useProjects();
 const router = useRouter();
 const alert = ref(false);
 const message = ref();
 const type = ref();
-// const store = useStore()
-// const { displayUser } = storeToRefs(store)
 interface Task {
   name: string,
   description: string
@@ -41,8 +39,8 @@ const task = ref([] as Task[]);
 const form = reactive({
   title: "",
   description: "",
-  completed: false,
-  author: ""
+  author: "",
+  completed: false
 });
 
 const rules = {
@@ -70,29 +68,35 @@ const submitTask = async () => {
       await addProjects(
         form.title,
         form.description,
-        form.completed,
+        store.getUser(),
+        form.completed
       )
       alert.value = true
       message.value = "Successfully added"
       type.value = "success"
+      console.log(form)
       setTimeout(() => {
         router.push("/")
         alert.value = false
       }, 3000)
-    } catch (e) {
+    } catch (error) {
       alert.value = true
-      message.value = e.message
+      message.value = error.message
       type.value = "danger"
       setTimeout(() => {
         alert.value = false
       }, 3000)
-      console.log(e)
+      console.log(error)
     }
   }
 };
 
 const length = computed(() => {
   return task.value.length < 1 ? false : true;
+})
+
+onMounted(() => {
+  console.log(store.getUser())
 })
 
 </script>
