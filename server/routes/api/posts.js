@@ -4,7 +4,7 @@ const mongodb = require('mongodb');
 const router = express.Router();
 
 // Get Posts
-router.get('/', async (_, res) => {
+router.get('/', async (req, res) => {
   const posts = await loadPostCollection();
   res.send(await posts.find({}).toArray());
 })
@@ -40,6 +40,7 @@ router.put('/:id', async(req, res) => {
     { $set: {
       title: req.body.title,
       description: req.body.description,
+      author: req.body.author,
       completed: req.body.completed
     } }, 
     { upsert: true }, (err, result) => {
