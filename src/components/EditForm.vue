@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto">
     <transition name="fade">
-      <AlertMessage :type="type" :message="message" v-if="alert" />
+      <AlertMessage :type="type" :message="message" />
     </transition>
     <h1 class="text-3xl font-bold text-gray-500 text-center mt-3 mb-5"></h1>
     <div class="form-section">
