@@ -1,36 +1,29 @@
 <template>
-  <div class="home">
+  <!-- <div class="home">
+    <Navbar />
+    <TabMenu /> -->
     <div class="lower-item ">
       <div v-if="isLoading" class="mt-5 grid justify-items-center">
           <Loading />
       </div>
       <div v-else>
-        <div class="projects-ongoing mt-5" >
-          <div v-if="projects.length">
-            <div class="ongoing mx-20 sm:mx-2 sm:mb-4">
-              <TransitionGroup name="fade" tag="p">
-                <span class="list-items grid justify-items-center" v-for="project in projects" :key="project._id">
-                  <SingleProject
-                    v-if="!project.completed && project.author === store.getUser()"
-                    :project="project"
-                    @openDialog="openModal"
-                    @deleteProj="deleteProjects"
-                    @task="completeTask"
-                  />
-                </span>
-              </TransitionGroup>
-            </div>
-          </div>
-          <div v-else>
-            <p class="text-gray-400 text-center">Wohooo, nothing left on task</p>
-          </div>
-        </div>
+        <TransitionGroup name="fade" tag="p">
+          <span v-for="project in projects" :key="project._id">
+            <SingleProject
+              v-if="!project.completed && project.author === store.getUser()"
+              :project="project"
+              @openDialog="openModal"
+              @deleteProj="deleteProjects"
+              @task="completeTask"
+            />
+          </span>
+        </TransitionGroup>
       </div>
     </div>
-
+<!-- 
     <transition name="fade">
       <div v-if="deleteModal">
-        <Teleport to=".modals" >
+        <Teleport to=".modals">
           <Modal teleport="body" 
             title="Delete Project"
             message="Are you sure you want to delete this project?"
@@ -43,14 +36,16 @@
         </Teleport>
       </div>
     </transition>
-  </div>
+  </div> -->
 </template>
 
 <script lang="ts" setup>
+import TabMenu from "@/components/TabMenu.vue";
+import Navbar from "@/components/AppNavbar.vue";
 import { computed, onMounted, ref }  from "vue";
+import Loading from "@/components/LoadingComponent.vue";
 import useProjects from "@/composables/Projects";
 import SingleProject from "@/components/SingleProject.vue";
-import Loading from "@/components/LoadingComponent.vue";
 import Modal from "@/components/ModalComponent.vue";
 import AlertMessage from "@/components/AlertMessage.vue";
 import { useRouter } from "vue-router";
@@ -93,11 +88,9 @@ const completeTask = async (task: any) => {
   router.push('/task-completed')
 } 
 
-const displayProjects = () => {
+const displayProjects = async () => {
   isLoading.value = true;
-  setTimeout(async() => {
     projects.value = await getData();
-  }, 3000)
   isLoading.value = false;
   deleteModal.value = false;
 }
@@ -121,10 +114,8 @@ const getLength = computed(() => {
   return projects.value.length;
 })
 
-
 onMounted(() => {
   displayProjects();
-  // console.log(store.getUser())
 })
 
 </script>
@@ -162,6 +153,4 @@ onMounted(() => {
 .fade-leave-active {
   transition: all 0.4s ease;
 }
-
-
 </style>

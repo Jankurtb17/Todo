@@ -5,52 +5,52 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "home",
-    component: () => import("@/views/HomeView.vue"),
+    components: {
+      MainContent: () => import("@/base/BaseLayout.vue"),
+    },
     meta: {
       requiresAuth: true,
-    }
-  },
-  {
-    path: "/project",
-    name: "project",
-    component: () => import("@/components/TaskForm.vue"),
-    meta: {
-      requiresAuth: true,
-    }
-  },
-  {
-    path: "/task-completed",
-    name: "task-completed",
-    component: () => import("@/components/TaskCompleted.vue"),
-    meta: {
-      requiresAuth: true 
-    }
-  },
-  {
-    path: "/:id",
-    name: "editProject",
-    component: () => import("@/components/EditForm.vue"),
-    meta: {
-      requiresAuth: true 
-    }
+    },
+    children: [
+      {
+        path: "/task-list",
+        name: "taskk-list",
+        component: () => import("@/components/TaskList.vue"),
+      },
+      {
+        path: "/create",
+        name: "project",
+        component: () => import("@/components/TaskForm.vue"),
+      },
+      {
+        path: "/task-completed",
+        name: "task-completed",
+        component: () => import("@/components/TaskCompleted.vue"),
+      },
+      {
+        path: "/:id",
+        name: "task-edit",
+        component: () => import("@/components/EditForm.vue"),
+        props: true,
+      },
+    ]
   },
   {
     path: "/register",
     name: "register",
-    component: () => import("@/views/Register.vue"),
+    components: {
+      LoginContent: () => import("@/views/Register.vue"),
+    },
     meta: {
-      hideNavbar: true,
-      hideMainLogo: true
-    }
+      requiresAuth: true,
+    },
   },
   {
     path: "/login",
     name: "login",
-    component: () => import("@/views/SignIn.vue"),
-    meta: {
-      hideNavbar: true,
-      hideMainLogo: true
-    }
+    components: {
+      LoginContent: () => import("@/views/SignIn.vue"),
+    },
   },
   { 
     path: '/:pathMatch(.*)*', 

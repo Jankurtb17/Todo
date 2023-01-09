@@ -1,6 +1,6 @@
 <template>
-  <div class="border shadow py-2 px-10 ml-5 mr-5 rounded lg:w-10/12 sm:w-full md:w-full border ">
-    <div class="animate-pulse flex space-x-4" >
+  <div class="container mx-auto border shadow py-2 px-10 ml-5 mr-5 rounded lg:w-10/12 sm:w-full md:w-full border ">
+    <div class="animate-pulse flex" >
       <div class="flex-1 space-y-3 py-1">
         <div class="h-2 bg-slate-200 rounded"></div>
         <div class="space-y-3">

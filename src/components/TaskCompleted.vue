@@ -2,7 +2,7 @@
   <div v-if="isLoading" class="mt-5 grid justify-items-center">
     <LoadingComponent />
   </div>
-  <div v-else>
+  <div v-else class="mt-3">
     <div class="ongoing mx-20 sm:mx-2 sm:mb-4">
       <TransitionGroup name="fade" tag="p">
         <span class="list-items grid justify-items-center" v-for="project in projects" :key="project._id">
