@@ -1,9 +1,5 @@
 {
-  "version": 2,
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "./public/"
-    }
+  "rewrites": [
+    { "source": "/:path*", "destination": "../server/public/index.html" }
   ]
 }
