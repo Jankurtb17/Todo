@@ -12,6 +12,7 @@ module.exports = defineConfig({
       }
     }
   },
+  base: './',
   transpileDependencies: true,
   chainWebpack: config => {
     config.module.rules.delete('eslint');
