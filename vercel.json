@@ -1,5 +1,3 @@
 {
-  "rewrites": [
-    { "source": "/:path*", "destination": "./server/public/index.html" }
-  ]
+  "rewrites": [{ "source": "/:path*", "dest": "./public/index.html" }]
 }

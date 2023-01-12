@@ -2,9 +2,9 @@ const { defineConfig } = require("@vue/cli-service");
 const path = require('path')
 module.exports = defineConfig({
   publicPath: process.env.NODE_ENV === 'production'
-    ? '/server/public/'
+    ? '../public/'
     : '/',
-  outputDir: path.resolve(__dirname, '../server/public'),
+  outputDir: path.resolve(__dirname, '../public'),
   devServer: {
     proxy: {
       '/post': {
