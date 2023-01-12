@@ -56,6 +56,13 @@ const routes: Array<RouteRecordRaw> = [
     path: '/:pathMatch(.*)*', 
     redirect: "/login",
   },
+//   {
+//     path: '*',
+//     name: 'catchAll',
+//     components: {
+//       LoginContent: () => import("@/views/SignIn.vue"),
+//     },
+//  }
 ];
 
 const router = createRouter({
