@@ -59,9 +59,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '*',
     name: 'catchAll',
-    components: {
-      LoginContent: () => import("@/views/SignIn.vue"),
-    },
+    redirect: "/login"
  }
 ];
 
