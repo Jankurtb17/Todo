@@ -5,7 +5,6 @@ module.exports = defineConfig({
     ? '../dist/'
     : '/',
   outputDir: path.resolve(__dirname, '../dist'),
-  indexPath: "../dist/index.html",
   devServer: {
     proxy: {
       '/post': {
