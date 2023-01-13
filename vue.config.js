@@ -4,7 +4,8 @@ module.exports = defineConfig({
   publicPath: process.env.NODE_ENV === 'production'
     ? './dist/'
     : '/',
-  outputDir: path.resolve(__dirname, './dist'),
+  outputDir: path.resolve(__dirname, '../dist'),
+  indexPath: "../dist/index.html",
   devServer: {
     proxy: {
       '/post': {
